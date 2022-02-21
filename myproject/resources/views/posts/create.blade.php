@@ -15,10 +15,10 @@
   </div>
   <div class="mb-3">
     <label for="exampleInputPassword1" class="form-label">Post Creator</label>
-    <select name="post_creator" class="form-control">
-        <option value="1">Ahmed</option>
-        <option value="2">Ali</option>
-        <option value="3">Mohammed</option>
+    <select name="user_id" class="form-control">
+      @foreach($users as $user)
+        <option value="{{$user->id}}">{{$user->name}}</option>
+      @endforeach
     </select>
   </div>
   

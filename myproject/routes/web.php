@@ -28,6 +28,6 @@ Route::put('/posts/{post}',[PostController::class,'update'])->name('posts.update
 
 Route::get('/posts/{post}/edit',[PostController::class,'edit'])->name('posts.edit');
 
-Route::delete('/posts/{post}', [PostController::class, 'show'])->name('posts.destroy');
+Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
 
 Route::post('/posts',[PostController::class,'store'])->name('posts.store');

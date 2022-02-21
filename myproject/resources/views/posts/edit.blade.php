@@ -3,23 +3,23 @@
 @section('title') Update Post @endSection
 
 @section('content')
-<form class="mt-5" method="POST" action="{{route('posts.update', ['post' => $post['id']])}}">
+<form class="mt-5" method="POST" action="{{route('posts.update',  $post->id)}}">
   @csrf
   @method('PUT')
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Title</label>
-    <input name="title" type="text" value="{{$post['title']}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <input name="title" type="text" value="{{$post->title}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
   </div>
   <div class="mb-3">
     <label for="exampleInputPassword1" class="form-label">Description</label>
-    <textarea name="description" class="form-control">{{$post['body']}}</textarea>
+    <textarea name="description" class="form-control">{{$post->description}}</textarea>
   </div>
   <div class="mb-3">
     <label for="exampleInputPassword1" class="form-label">Post Creator</label>
-    <select name="post_creator" class="form-control">
-        <option value="1">Ahmed</option>
-        <option value="2">Ali</option>
-        <option value="3">Mohammed</option>
+    <select name="user_id" class="form-control">
+      @foreach($users as $user)
+        <option value="{{$user->id}}">{{$user->name}}</option>
+      @endforeach
     </select>
   </div>
   
