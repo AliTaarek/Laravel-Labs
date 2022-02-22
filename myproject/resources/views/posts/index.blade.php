@@ -13,6 +13,7 @@
             <tr>
             <th scope="col">ID</th>
             <th scope="col">Title</th>
+            <th scope="col">Title Slug</th>
             <th scope="col">Posted By</th>
             <th scope="col">Created At</th>
             <th scope="col">Actions</th>
@@ -23,6 +24,7 @@
                 <tr>
                     <th scope="row">{{$post->id}}</th>
                     <td>{{$post->title}}</td>
+                    <td>{{$post->title_slug ? $post->title_slug : "Not Found"}}</td>
                     <td>{{$post->user ? $post->user->name : "Not Found"}}</td>
                     <td>{{$post->created_at}}</td>
                     <td><a href="{{route('posts.show',$post->id)}}" class="btn btn-info">View</a> 

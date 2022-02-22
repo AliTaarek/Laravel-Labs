@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Requests\StorePostRequest;
+use App\Jobs\PruneOldPostsJob;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\User;
@@ -10,7 +11,7 @@ use Carbon\Carbon;
 class PostController extends Controller
 {
     public function index(){
-       
+        PruneOldPostsJob::dispatch();
         $posts = Post::paginate(8);
         return view('posts.index',['posts'=>$posts]);
     }
@@ -29,7 +30,7 @@ class PostController extends Controller
         return view('posts.show',['post'=>$post,'date' => $date]);
     }
 
-    public function store(){
+    public function store(StorePostRequest $request){
 
         $requestData = request()->all();
 
@@ -48,12 +49,14 @@ class PostController extends Controller
         return view('posts.edit',[ 'post' => $post,'users'=>$users ]);
     }
 
-    public function update($postId){
+    public function update(StorePostRequest $request,$postId){
         // Update the post of id $postId in database
         $requestData = request()->all();
-        Post::where('id',$postId) ->update([
+        $post = Post::find($postId);
+        $post->title_slug = null;
+        $post->update([
             'title'=>$requestData['title'],
-            'description' => $requestData['title'],
+            'description' => $requestData['description'],
             'user_id' => $requestData['user_id'],
         ]);
 
