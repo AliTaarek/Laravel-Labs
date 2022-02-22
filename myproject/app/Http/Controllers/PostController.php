@@ -11,7 +11,7 @@ use Carbon\Carbon;
 class PostController extends Controller
 {
     public function index(){
-        PruneOldPostsJob::dispatch();
+        //PruneOldPostsJob::dispatch();
         $posts = Post::paginate(8);
         return view('posts.index',['posts'=>$posts]);
     }
